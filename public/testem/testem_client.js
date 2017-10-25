@@ -263,7 +263,7 @@ var Testem = {
         case 'tap-all-test-results':
           self.emit('tap-all-test-results');
           break;
-        case 'finish';
+        case 'finish':
           self.finish();
           break;
         case 'stop-run':
