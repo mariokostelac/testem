@@ -263,11 +263,28 @@ var Testem = {
         case 'tap-all-test-results':
           self.emit('tap-all-test-results');
           break;
+        case 'finish';
+          self.finish();
+          break;
         case 'stop-run':
           self.emit('after-tests-complete');
           break;
       }
     });
+  },
+  finish: function() {
+    if (!this.finishHandlers) {
+      return;
+    }
+    for (var i = 0; i < this.finishHandlers.length; ++i) {
+      this.finishHandlers[i].bind(this)();
+    }
+  },
+  onFinish: function(handler) {
+    if (!this.finishHandlers) {
+      this.finishHandlers = [];
+    }
+    this.finishHandlers.push(handler);
   },
   sendId: function() {
     this.sendMessageToIframe('get-id', this.getId());

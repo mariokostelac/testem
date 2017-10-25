@@ -176,6 +176,9 @@ function initSocket(id) {
   socket.on('stop-run', function() {
     sendMessageToParent('stop-run');
   });
+  socket.on('finish', function() {
+    sendMessageToParent('finish');
+  });
 }
 
 init();
